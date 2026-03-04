@@ -1,0 +1,39 @@
+# =========================
+# Python & Environment
+# =========================
+# Ignore the virtual environment folder
+venv/
+env/
+
+# Ignore compiled Python files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# =========================
+# Jupyter Notebooks
+# =========================
+# Ignore notebook checkpoint files
+.ipynb_checkpoints/
+
+# =========================
+# Project Specific Data
+# =========================
+# Ignore the SQLite database to prevent committing a growing file
+data/database/*.db
+*.sqlite3
+
+# Ignore the raw screenshots
+data/raw_images/*.jpg
+data/raw_images/*.jpeg
+data/raw_images/*.png
+
+# Ignore any temporary CSV or Excel exports
+*.csv
+*.xlsx
+
+# =========================
+# OS Generated Files
+# =========================
+.DS_Store
+Thumbs.db
