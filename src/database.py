@@ -2,6 +2,7 @@ from sqlalchemy import create_engine, Column, Integer, String, DateTime, Foreign
 from sqlalchemy.orm import declarative_base, sessionmaker
 import datetime
 import pandas as pd
+import os
 
 Base = declarative_base()
 
@@ -19,7 +20,11 @@ class SquareValue(Base):
     reward_amount = Column(Integer)
 
 
-engine = create_engine('sqlite:///../data/database/rewards.db')
+
+base_dir = os.path.dirname(os.path.abspath(__file__))
+db_path = os.path.join(base_dir, "./data/database.db")
+os.makedirs(os.path.dirname(db_path), exist_ok=True)
+engine = create_engine(f'sqlite:///{os.path.abspath(db_path)}')
 Base.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)
 
