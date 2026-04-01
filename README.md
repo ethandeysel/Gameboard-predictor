@@ -1,2 +1,4 @@
 # Gameboard-predictor
-Use statistical learning methods, OCR and streamlit to create a dashboard that takes new data - uplaods it and recalaculates model predictions and then predict optimal game board picks
+Use statistical learning methods, OCR and streamlit to create a dashboard that takes new data - uploads it and recalculates model predictions and then predict optimal game board picks. This project is inspired by the Discovery Vitality weekly gameboard to pick tiles to win Discovery miles. It combines my personal interests of Bayesian modelling and tackling a real world challenge.
+Personal gameboards are uploaded weekly and used in conjuction with a 'recently played' penalty parameter to create a heatmap of predicted optimal squares in the 5 by 4 grid to pick the following week. 
+This is done using a hierarchical spatial bayesian model with PyMC but continuous testing is done tofind the best model within the bayesian framework. The reason for the bayesian framework is to incorporate other boards not tied to my account as a weak prior since there may be personalization in the weekly gameboard algorithm.
