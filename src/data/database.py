@@ -1,8 +1,9 @@
 import os
 import pandas as pd
-from sqlalchemy import create_engine, Column, Integer, String, DateTime, ForeignKey, Float
+from sqlalchemy import create_engine, Column, Integer, String, DateTime, ForeignKey, Float, text
 from sqlalchemy.orm import declarative_base, sessionmaker
 import datetime
+import sqlite3
 
 Base = declarative_base()
 
@@ -65,4 +66,8 @@ def get_history_df():
     JOIN boards b ON s.board_id = b.id
     ORDER BY b.week_number ASC, s.grid_index ASC
     """
-    return pd.read_sql(query, con=engine)
+    
+    # Bypass SQLAlchemy entirely and use Python's native SQLite driver
+    # db_path is the variable you defined earlier in the file
+    with sqlite3.connect(db_path) as conn:
+        return pd.read_sql(query, con=conn)

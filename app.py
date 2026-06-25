@@ -10,7 +10,7 @@ import os
 # Import your custom modules
 from src.data.database import save_results, get_history_df
 from src.data.ocr import number_extractor
-from src.models.gp_model import build_and_sample_gp, predict_next_week
+from src.models.GP import build_and_train_gp, predict_next_week
 
 # --- Page Configuration ---
 st.set_page_config(page_title="Tactical Board Predictor", layout="wide")
@@ -74,8 +74,8 @@ with st.sidebar:
 # --- UI Main Body: GP Inference ---
 st.header("2. Spatiotemporal Inference")
 
-if st.button("Run NUTS Sampler & Generate Targets", type="primary"):
-    with st.spinner("Compiling C-Graphs and running MCMC Sampler. This will take a moment..."):
+if st.button("Run Guassian Process & Generate Targets", type="primary"):
+    with st.spinner("This will take a moment..."):
         # 1. Fetch Data
         df = get_history_df()
         df_clean = df.dropna(subset=['reward']).copy()
@@ -94,11 +94,8 @@ if st.button("Run NUTS Sampler & Generate Targets", type="primary"):
         target_prediction_week = int(df_clean['week_number'].max() + 1)
 
         # 2. Run GP (Using the tiny test trace for speed, increase draws/tune for real use)
-        model, gp, trace = build_and_sample_gp(X_train, y_train, draws=100, tune=100)
-        
-        # 3. Predict Next Week
-        best_tile, evs, ucbs = predict_next_week(model, gp, trace, target_week=target_prediction_week)
-
+        model, likelihood = build_and_train_gp(X_train, y_train, training_iterations=150)
+        best_tile, evs, ucbs = predict_next_week(model, likelihood, target_week=target_prediction_week)
         # --- Render Results ---
         st.success(f"Inference Complete. Projecting for Week {target_prediction_week}.")
         
