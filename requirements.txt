@@ -1,26 +1,26 @@
 
 
-Core Data & Math
+#Core Data & Math
 
 numpy>=1.24.0
 pandas>=2.0.0
 
-Machine Learning & Kernels
+#Machine Learning & Kernels
 
 torch>=2.0.0
 gpytorch>=1.11
 
-Database Management
+#Database Management
 
 SQLAlchemy>=2.0.0
 
-Dashboard & Visualization
+#Dashboard & Visualization
 
 streamlit>=1.30.0
 matplotlib>=3.7.0
 seaborn>=0.13.0
 
-Image Processing (For your OCR pipeline)
+#Image Processing (For your OCR pipeline)
 
 opencv-python-headless>=4.8.0
 Pillow>=10.0.0
